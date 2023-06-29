@@ -5,7 +5,7 @@
 #displays good luck for the 8th loop iteration
 #displays Best School for the other iterations
 
-idx=1
+idx=0
 
 while [ $idx -le 10 ]
 do
