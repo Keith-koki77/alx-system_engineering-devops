@@ -5,17 +5,16 @@
 #displays Best School for the other iterations
 
 idx=0
-
-while [ $idx -lt 10 ]
-do
-	if [ $idx -eq 3 ]
-	then
-	    echo "bad luck"
-	elif [ $idx -eq 7 ]
-	then
-	    echo "good luck"
+while [[ $idx -le 10 ]];
+	do
+	if [ $idx -eq 4 ];
+		then
+		echo "bad luck";
+	elif [ $idx -eq 8 ];
+		then
+		echo "good luck";
 	else
-	    echo "Best School"
-	fi
-	idx=$((idx+1))
-done
+		echo "Best School";
+	fi;
+	(( $idx++ ))
+done;
