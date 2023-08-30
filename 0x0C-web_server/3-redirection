@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#To Configure your Nginx server so that /redirect_me
+#301 moved permanently
+
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install nginx
+
+echo "Hello world!" | sudo tee /var/www/html/index.html
+
+replacement_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/Keith-koki77 permanent;"
+
+sudo sed -i "s/server_name _;/$replacement_string/" /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
