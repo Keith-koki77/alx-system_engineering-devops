@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#404 error
+
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install nginx
+
+echo "Hello world!" | sudo tee /var/www/html/index.html
+
+replacement_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/Keith-koki77 permanent;"
+
+sudo sed -i "s/server_name _;/$replacement_string/" /etc/nginx/sites-enabled/default
+
+#creares 404 error page
+
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+replacement_string="listen 80 default_server;\n\tpage_error 404 \/404.html;\n\tlocation = \/404.html {\n\troot \/var/www/htm;\n\t\tinternal;\n\t}"
+
+sudo sed -i "s/listen 80 default_server;/$replacement_string/" /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
