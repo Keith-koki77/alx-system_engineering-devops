@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install nginx
+
+echo "Hello world!" | sudo tee /var/www/html/index.html
+
+replacement_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/Keith-koki77 permanent;"
+
+sudo sed -i "s/server_name _;/$replacement_string/" /etc/nginx/sites-enabled/default
+
+#creates 404 error page
+
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+sudo sed -i "server_name _;/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+
+#tests nginx
+sudo nginx -t
+
+#nginx restart
+sudo service nginx restart
