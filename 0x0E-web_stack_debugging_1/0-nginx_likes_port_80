@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#A script that make nginx listen to port 80
+#Solved by removing existing default file and replacing.
+#Implemented by creating symbolic link
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
