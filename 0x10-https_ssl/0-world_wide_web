@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Displays information about subdomains
+#Displays information about subdomains
+
 function domainInfo() {
     SUBDOMAINS=("www" "lb-01" "web-01" "web-02")
     if [ $# -eq 1 ]
