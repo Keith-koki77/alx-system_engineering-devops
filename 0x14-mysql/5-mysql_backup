@@ -1,41 +1,7 @@
 #!/usr/bin/env bash
+#Script to generate MySQL dump and a generate a
+#compressed archive of it
+mysqldump -u root -p"$1" --opt --all-databases > backup.sql
 
-# Check if the password argument is provided
-if [ $# -ne 1 ]; then
-  echo "Usage: $0 <mysql_root_password>"
-  exit 1
-fi
-
-# MySQL root password
-mysql_root_password="$1"
-
-# Directory to store backup files
-backup_dir="/path/to/backup/directory"
-
-# Create a backup directory if it doesn't exist
-mkdir -p "$backup_dir"
-
-# Define the backup file name
-backup_file="${backup_dir}/backup-$(date +'%d-%m-%Y').sql"
-
-# MySQL dump command
-mysqldump -u root -p"$mysql_root_password" --all-databases > "$backup_file"
-
-# Check if the mysqldump command was successful
-if [ $? -eq 0 ]; then
-  echo "MySQL dump completed successfully."
-else
-  echo "Error: MySQL dump failed."
-  exit 1
-fi
-
-# Compress the backup file into a tar.gz archive
-tar -czvf "${backup_file}.tar.gz" "$backup_file"
-
-# Check if the compression was successful
-if [ $? -eq 0 ]; then
-  echo "Backup compressed to ${backup_file}.tar.gz"
-else
-  echo "Error: Compression failed."
-  exit 1
-fi
+date=$(date +"%d-%m-%Y")
+tar -czvf "$date.tar.gz" backup.sql
