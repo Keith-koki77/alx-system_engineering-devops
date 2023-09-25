@@ -9,10 +9,10 @@ import sys
 
 
 def get_employee_todo_progress(employee_id):
-    # Define the base URL of the API
+    """Define the base URL of the API"""
     base_url = 'https://jsonplaceholder.typicode.com'
 
-    # Make a GET request to retrieve user information
+    """Make a GET request to retrieve user information"""
     user_response = requests.get(f'{base_url}/users/{employee_id}')
     user_data = user_response.json()
 
@@ -22,15 +22,15 @@ def get_employee_todo_progress(employee_id):
 
     employee_name = user_data['name']
 
-    # Make a GET request to retrieve user's TODO list
+    """Make a GET request to retrieve user's TODO list"""
     todos_response = requests.get(f'{base_url}/todos?userId={employee_id}')
     todos_data = todos_response.json()
 
-    # Calculate the number of completed and total tasks
+    """Calculate the number of completed and total tasks"""
     total_tasks = len(todos_data)
     completed_tasks = sum(1 for todo in todos_data if todo['completed'])
 
-    # Print the employee's TODO list progress
+    """Print the employee's TODO list progress"""
     print(
         f"Employee {employee_name} is done with tasks "
         f"({completed_tasks}/{total_tasks}):"
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     employee_id = sys.argv[1]
 
     try:
-        # Ensure the employee ID is an integer
+        """Ensure the employee ID is an integer"""
         employee_id = int(employee_id)
     except ValueError:
         print("Employee ID must be an integer.")
