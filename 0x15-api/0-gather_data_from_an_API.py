@@ -8,50 +8,34 @@ import requests
 import sys
 
 
-def get_employee_todo_progress(employee_id):
-    """Define the base URL of the API"""
-    base_url = 'https://jsonplaceholder.typicode.com'
-
-    """Make a GET request to retrieve user information"""
-    user_response = requests.get(f'{base_url}/users/{employee_id}')
-    user_data = user_response.json()
-
-    if 'name' not in user_data:
-        print("Employee not found.")
-        return
-
-    employee_name = user_data['name']
-
-    """Make a GET request to retrieve user's TODO list"""
-    todos_response = requests.get(f'{base_url}/todos?userId={employee_id}')
-    todos_data = todos_response.json()
-
-    """Calculate the number of completed and total tasks"""
-    total_tasks = len(todos_data)
-    completed_tasks = sum(1 for todo in todos_data if todo['completed'])
-
-    """Print the employee's TODO list progress"""
-    print(
-        f"Employee {employee_name} is done with tasks "
-        f"({completed_tasks}/{total_tasks}):"
-    )
-    for todo in todos_data:
-        if todo['completed']:
-            print(f"\t{todo['title']}")
-
-
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <employee_id>")
-        sys.exit(1)
+    """Define the base URL for the REST API"""
+    url = "https://jsonplaceholder.typicode.com/"
 
-    employee_id = sys.argv[1]
+    """
+    Get the user information by making a GET request
+    to the "/users" endpoint
+    """
+    user = requests.get(url + "users/{}".format(sys.argv[1])).json()
 
-    try:
-        """Ensure the employee ID is an integer"""
-        employee_id = int(employee_id)
-    except ValueError:
-        print("Employee ID must be an integer.")
-        sys.exit(1)
+    """
+    Get the TODO list for the user by making a GET
+    request to the "/todos" endpoint
+    """
+    todos = requests.get(url + "todos", params={"userId": sys.argv[1]}).json()
 
-    get_employee_todo_progress(employee_id)
+    """
+    Create a list of completed task titles by filtering the TODO list
+    """
+    complete = [t.get("title") for t in todos if t.get("completed") is True]
+
+    """
+    Print a summary of the user's completed tasks
+    """
+    print("Employee {} is done with tasks({}/{}):".format(
+        user.get("name"), len(complete), len(todos)))
+
+    """
+    Print the titles of completed tasks with indentation
+    """
+    [print("\t {}".format(c)) for c in complete]
