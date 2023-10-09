@@ -1,8 +1,17 @@
 # POSTMORTEM: Web Stack Outage Incident
+![Debugging](https://github.com/Keith-koki77/alx-system_engineering-devops/assets/122968859/290959ad-71fc-41d9-80c6-dfe0eb677c80)
 
 ## Issue Summary
 * Start Time: October 9,2023, 10:45AM (EAT).
 * End Time: October 9,2023, 3:30PM (EAT).
+* The outage affected the user authentication service, leading to a complete disruption of user logins
+* Approximately 65% of the users were unable to acccess their accounts during the outage.
+
+
+## Issue Summary
+* Start Time: October 9,2023, 10:45AM (EAT).
+* End Time: October 9,2023, 3:30PM (EAT).
+
 * The outage affected the user authentication service, leading to a complete disruption of user logins
 * Approximately 65% of the users were unable to acccess their accounts during the outage.
 
