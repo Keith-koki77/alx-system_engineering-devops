@@ -1,4 +1,5 @@
 # POSTMORTEM: Web Stack Outage Incident
+
 ![Debugging](https://github.com/Keith-koki77/alx-system_engineering-devops/assets/122968859/290959ad-71fc-41d9-80c6-dfe0eb677c80)
 
 ## Issue Summary
