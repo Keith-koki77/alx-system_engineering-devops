@@ -6,6 +6,7 @@ Python Script for Task 1
 import requests
 import sys
 
+
 def top_ten(subreddit):
     """
     Get 10 hottest posts of a subreddit

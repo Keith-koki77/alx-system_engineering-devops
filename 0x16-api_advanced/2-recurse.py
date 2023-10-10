@@ -6,6 +6,7 @@ Python Script for Task 2
 import requests
 import sys
 
+
 def recurse(subreddit, hot_list=[], after=None):
     """
     Returns a list of all hotposts titles of a subreddit
